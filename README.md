@@ -91,7 +91,7 @@ MAE, RMSE (m/s), MAPE (%, computed only where observed wind speed ≥ 0.5 m/s to
 
 ## Citation · 論文引用
 
-Er. Rishabh Aryan (2026). "Multi-Agent AI Chief of Staff for Turbine Fleet Operations: Integrating Advanced Wind Speed Forecasting to Optimize Real Time Performance, Maintenance and Grid Integration." *International Journal of Artificial Intelligence and Computer Electronics*, 2(3), 1–32.
+Er. Rishabh Aryan (2026). "Multi-Agent AI Chief of Staff for Turbine Fleet Operations: Integrating Advanced Wind Speed Forecasting to Optimise Real Time Performance, Maintenance and Grid Integration." *International Journal of Artificial Intelligence and Computer Electronics*, 2(3), 1–32.
 
 ## License
 
