@@ -3,4 +3,4 @@
 - Main bearing vibration RMS above 7 mm/s (ISO 10816 zone D style limit): stop the turbine for inspection.
 - Grid operator curtailment instructions must be followed within 15 minutes; log the instruction id.
 - Forecast deviation beyond the permitted band attracts deviation-settlement charges; revise schedules early.
-- Maintenance should be scheduled in forecast low-wind windows to minimise lost energy.
+- Maintenance should be scheduled in forecast low-wind windows to minimize lost energy.
