@@ -12,23 +12,25 @@ from .agents.orchestrator import OrchestratorAgent
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--csv", default="data/synthetic_scada.csv" if os.path.exists("data/synthetic_scada.csv") else None, help="SCADA-style CSV (default: committed synthetic CSV)"); ap.add_argument("--turbines", type=int, default=10)
+    ap.add_argument("--csv", default="data/synthetic/synthetic_scada.csv" if os.path.exists("data/synthetic/synthetic_scada.csv") else None, help="SCADA-style CSV (default: committed synthetic CSV)"); ap.add_argument("--turbines", type=int, default=10)
     ap.add_argument("--hours", type=int, default=168); ap.add_argument("--epochs", type=int, default=10)
     ap.add_argument("--grid_limit_kw", type=float, default=12000); ap.add_argument("--quick", action="store_true")
     ap.add_argument("--interactive", action="store_true", help="ask a human to approve each bundle")
     ap.add_argument("--out", default="runs"); a = ap.parse_args()
-    if a.quick: a.epochs, a.hours, a.turbines = 4, 48, 6
+    if a.quick: a.epochs, a.hours, a.turbines = 4, 24, 4
     rng = np.random.default_rng(0); lb = 24
     # --- forecaster training on one turbine's SCADA history ---
     base = load_scada_csv(a.csv) if a.csv else synthetic_scada(24 * 90)
+    if a.quick: base = base.iloc[-24 * 60:]
     df = add_features(base); X, y = make_windows(df, lookback=lb); tr, va, te = chrono_split(len(X))
-    sc = Scaler().fit(X[tr]); Xs = sc.transform(X).astype("float32"); ym, ys = y[tr].mean(), y[tr].std()
-    m = fit(CNNBiLSTMAttention(X.shape[2]), Xs[tr], ((y[tr] - ym) / ys).astype("float32"),
-            Xs[va], ((y[va] - ym) / ys).astype("float32"), epochs=a.epochs)
+    sc = Scaler().fit(X[tr]); Xs = sc.transform(X).astype("float32"); ws_i = list(df.columns).index("wind_speed"); last = X[:, -1, ws_i]; d = y - last   # residual on persistence
+    ym, ys = d[tr].mean(), d[tr].std()
+    m = fit(CNNBiLSTMAttention(X.shape[2]), Xs[tr], ((d[tr] - ym) / ys).astype("float32"),
+            Xs[va], ((d[va] - ym) / ys).astype("float32"), epochs=a.epochs)
     ws_i = list(df.columns).index("wind_speed")
-    res = {"forecast_test": regression_metrics(y[te], predict(m, Xs[te]) * ys + ym),
+    res = {"forecast_test": regression_metrics(y[te], last[te] + predict(m, Xs[te]) * ys + ym),
            "persistence_test": regression_metrics(y[te], X[te][:, -1, ws_i])}
-    forecaster = lambda W: predict(m, sc.transform(W).astype("float32")) * ys + ym
+    forecaster = lambda W: W[:, -1, ws_i] + predict(m, sc.transform(W).astype("float32")) * ys + ym
     # --- fleet: each turbine = test-period windows with a site offset + noise ---
     N, H = a.turbines, min(a.hours, len(X[te]) - 1)
     fleetX = np.stack([X[te][:H + 1].copy() for _ in range(N)], 1)       # (H+1, N, lb, F)
