@@ -1,4 +1,4 @@
-![Banner: crimson and black ink-wash background with the gold trigram ☷ (坤 Kūn, Earth), the title and a red seal stamp](docs/img/banner.jpg)
+![Banner: crimson and black ink-wash background with the gold trigram ☱ (兌 Duì, Lake), the title and a red seal stamp](docs/img/banner.jpg)
 
 # Multi-agent 'AI chief of staff' for wind-turbine fleet operations
 
@@ -18,7 +18,7 @@ A deterministic multi-agent "AI chief of staff" that forecasts, monitors, plans 
 
 The [live demo](https://rishabh-bgp.github.io/multi-agent-turbine-fleet-chief-of-staff/) runs a small version of the model directly in your browser. It shows one week of synthetic wind speed, the model's next-hour forecast (gold) and the persistence forecast (grey). Use the sliders to move through the test period or add a gust to the latest reading, and the forecast updates. The metrics are shown as red seal-style badges.
 
-**About the design.** The look borrows from Chinese ink painting: dark paper, gold lines, crimson seals. Each repository has its own trigram from the I Ching and its own seal stamp. This one uses ☷ 坤 Kūn, Earth, which stands for the receptive ground that supports everything, like the orchestrator supporting the fleet and its human approver. Across the series, 風 means wind and 預測 means forecast; the trigram for wind itself is ☴ 巽 Xùn. The motifs are decoration only and play no part in the method.
+**About the design.** The look borrows from Chinese ink painting: dark paper, gold lines, crimson seals. Each repository has its own trigram from the I Ching and its own seal stamp. This one uses ☱ 兌 Duì, Lake, which stands for a calm lake that reflects everything around it, like the orchestrator that brings every agent's view together for the human approver. Across the series, 風 means wind and 預測 means forecast; the trigram for wind itself is ☴ 巽 Xùn. The motifs are decoration only and play no part in the method.
 
 ## Architecture · 架構
 
