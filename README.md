@@ -172,4 +172,5 @@ This repository is part of my M.Tech thesis work.
 - [xai-shap-lime-cnn-bilstm-attention-wind](https://github.com/Rishabh-bgp/xai-shap-lime-cnn-bilstm-attention-wind)
 - [wuweidl-daoist-gated-wind-forecasting](https://github.com/Rishabh-bgp/wuweidl-daoist-gated-wind-forecasting)
 - [iot-n8n-wind-turbine-predictive-maintenance](https://github.com/Rishabh-bgp/iot-n8n-wind-turbine-predictive-maintenance)
+- [brain-tumor-mri-classification](https://github.com/Rishabh-bgp/brain-tumor-mri-classification) · [live demo](https://rishabh-bgp.github.io/brain-tumor-mri-classification/)
 - [All repositories](https://github.com/Rishabh-bgp?tab=repositories)
